@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestAll">
+
+	<test name="Crud">
+		<classes>
+			<class name="za.ac.cput.LibrarySystem.repostory.TestCrudBook" />
+			<class name="za.ac.cput.LibrarySystem.repostory.TestCrudDVD" />
+			<class name="za.ac.cput.LibrarySystem.repostory.TestCrudLoan" />
+			<class name="za.ac.cput.LibrarySystem.repostory.TestCrudReservation" />
+			<class name="za.ac.cput.LibrarySystem.repostory.TestCrudMember" />
+			<class name="za.ac.cput.LibrarySystem.services.BookServiceTest" />
+			<class name="za.ac.cput.LibrarySystem.services.BookServiceTest" />
+		</classes>
+	</test>
+ 
+</suite>

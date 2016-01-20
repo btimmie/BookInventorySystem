@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - libraryDB@localhost" uuid="baf81d96-e4e3-4b3f-b44e-dd91cbbcefdd">
+    <database-info product="MySQL" version="5.7.7-rc-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="librarydb"/>
+    <table name="book" schema="" catalog="librarydb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="subject" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tittle" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="isbn" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="f_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="l_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="place_of_publication" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="publisher_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_5nr6joxxjm233xyongnbacj1f" table="copy" schema="" catalog="librarydb" columns="book_id"/>
+      <index name="UK_ehpdfjpu1jm3hijhj4mm0hx9h" unique="true" columns="isbn"/>
+    </table>
+    <table name="copy" schema="" catalog="librarydb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="accession_number" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="copy_notes" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date_purchased" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="book_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_5nr6joxxjm233xyongnbacj1f" columns="book_id" ref-table="book" ref-schema="" ref-catalog="librarydb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_sy2jdwqh0igqdwkbxxcuvgbla" table="loan" schema="" catalog="librarydb" columns="access_no"/>
+      <index name="FK_5nr6joxxjm233xyongnbacj1f" unique="false" columns="book_id"/>
+    </table>
+    <table name="dvd" schema="" catalog="librarydb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="subject" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tittle" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="code" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="distributor" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="duration" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="UK_ktpm0vqicgjrpgrkn4xkg8e5m" unique="true" columns="code"/>
+    </table>
+    <table name="librarian" schema="" catalog="librarydb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="f_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="l_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="librarianid" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_2u36dcm0x1u0pll549faq5ahr" table="loan" schema="" catalog="librarydb" columns="librarian_id"/>
+      <index name="UK_r1yf15547wy7ky2tyh8u2uka6" unique="true" columns="librarianid"/>
+    </table>
+    <table name="loan" schema="" catalog="librarydb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="due_date" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="loan_date" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="access_no" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="librarian_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="member_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_2u36dcm0x1u0pll549faq5ahr" columns="librarian_id" ref-table="librarian" ref-schema="" ref-catalog="librarydb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ewwcdktexpi8084h07xhwccn" columns="member_id" ref-table="member" ref-schema="" ref-catalog="librarydb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_sy2jdwqh0igqdwkbxxcuvgbla" columns="access_no" ref-table="copy" ref-schema="" ref-catalog="librarydb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_2u36dcm0x1u0pll549faq5ahr" unique="false" columns="librarian_id"/>
+      <index name="FK_ewwcdktexpi8084h07xhwccn" unique="false" columns="member_id"/>
+      <index name="FK_sy2jdwqh0igqdwkbxxcuvgbla" unique="false" columns="access_no"/>
+    </table>
+    <table name="member" schema="" catalog="librarydb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="house_number" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="postal_code" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="street" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="suburb" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="first_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="member_id" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_ewwcdktexpi8084h07xhwccn" table="loan" schema="" catalog="librarydb" columns="member_id"/>
+      <index name="UK_4rw879c4q7wrgi3v64cy73b17" unique="true" columns="member_id"/>
+    </table>
+    <table name="reservation" schema="" catalog="librarydb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="book" sqlType="TINYBLOB" precision="255" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="member" sqlType="TINYBLOB" precision="255" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="reserved_date" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+  </data-source>
+</component>
